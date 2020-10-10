@@ -17,7 +17,7 @@ var err error
 func Init() {
 	err := godotenv.Load(fmt.Sprintf("../%s.env", os.Getenv("GO_ENV")))
 	if err != nil {
-		log.Fatal(err)
+		println("Error loading .env file")
 	}
 	DB_USER := os.Getenv("DB_USER")
 	DB_PASS := os.Getenv("DB_PASS")
