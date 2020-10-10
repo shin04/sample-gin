@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: book_db
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${ROOTPASS}
+    ports:
+      - "3306:3306"
+    volumes:
+      # 初期化よう
+      - ./docker/db/db_init:/docker-entrypoint-initdb.d
+    networks:
+      - default
+
+  golang:
+    build:
+      context: ./docker/api
+    image: 808743224163.dkr.ecr.ap-northeast-1.amazonaws.com/sample-gin:latest
+    container_name: book_api
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/go/src
+    working_dir: /go/src/app
+    depends_on:
+      - mysql
+    # command: go run main.go
