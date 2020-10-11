@@ -41,11 +41,8 @@ jobs:
 
       - name: Make .env file and task-definition
         env:
-          ENV: ${{ secrets.ENV }}
           TASK_DEFINITION_JSON: ${{ secrets.TASK_DEFINITION }}
         run: |
-          touch .env
-          echo ${ENV} > .env
           touch task-definition.json
           echo ${TASK_DEFINITION_JSON} > task-definition.json
 

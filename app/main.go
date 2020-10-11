@@ -13,7 +13,7 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, "Hello, World")
+		c.JSON(200, "Hello World !!!")
 	})
 	r.POST("/posts", createPost)
 	r.GET("/posts", getAllPost)
